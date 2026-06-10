@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+.turbo/
+
+# Env / secrets
+.env
+.env.example
+.env.local
+*.local
+
+# OS
+.DS_Store
+
+# Local agent / editor
+.claude/
+
+# Data / media
+/data/
+*.wav.tmp
+tmp/

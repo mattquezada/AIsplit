@@ -1,0 +1,53 @@
+[project]
+name = "aisplit-backend"
+version = "0.1.0"
+description = "AI Worship Multitrack Platform — backend API + worker"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic[email]>=2.7",
+    "pydantic-settings>=2.3",
+    "sqlalchemy>=2.0",
+    "psycopg[binary]>=3.2",
+    "alembic>=1.13",
+    "python-jose[cryptography]>=3.3",
+    "bcrypt>=4.0",
+    "python-multipart>=0.0.9",
+    "boto3>=1.34",
+    "celery[redis]>=5.4",
+    "redis>=5.0",
+    # Pinned <2: torch 2.2.x is built against the NumPy 1.x ABI; NumPy 2.x breaks
+    # torch<->numpy interop (from_numpy/.numpy()) which Demucs relies on.
+    "numpy>=1.26,<2",
+    "scipy>=1.11",
+    "soundfile>=0.12",
+    "librosa>=0.10",
+    # Source separation + high-quality pitch shifting. torch/torchaudio are
+    # installed from the CPU wheel index in the Dockerfile (before this package)
+    # so they don't pull the multi-GB CUDA build.
+    "demucs>=4.0",
+    "pyrubberband>=0.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2",
+    "httpx>=0.27",
+    "ruff>=0.5",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
